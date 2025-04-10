@@ -1,0 +1,7 @@
+.time-line-container>div:last-child .education__time>.education__line {
+    display: none;
+}
+@font-face {
+    font-family: "Merriweather-Light";
+    src: url("../fonts/Merriweather-Light.ttf") format("Merriweather");
+}

@@ -1,0 +1,98 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HorizontalCard from "../components/HorizontalCard.astro";
+import { getCollection } from "astro:content";
+import createSlug from "../lib/createSlug";
+import "../styles/style.css";
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const last_posts = posts.slice(0, 3);
+---
+
+<BaseLayout sideBarActiveItemID="home">
+  <div class="pb-12 mt-5">
+    <div class="text-3xl">CAI TSZ KIT(Jason)</div>
+    <div class="text-1xl">CEO(Zilin Family Office)</div>
+    <div class="text-1x1 py-1">梓林家族办公室（香港）有限公司 香港（中国）</div>
+    <!-- <div class="text-5xl font-bold">
+      梓林家族办公室（香港）有限公司 香港（中国）
+    </div> -->
+    <div class="text-1x1 py-3">
+      联合创始人，协助公司获取了数百万美元的原始投资。参与构建公司战略管理
+      团队，推动业务增长并确保企业持续稳健发展。
+    </div>
+    <!-- <div class="py-2">
+      <text class="text-lg">
+        This is <b>Astrofy</b> a free and open-source template for your Personal
+        Portfolio Website built with Astro and TailwindCSS. Create in minutes a website
+        with Blog, CV, Project Section, Store and RSS Feed. I hope you find it useful!
+      </text>
+    </div> -->
+    <!-- <div class="mt-8">
+      <a class="btn" href="https://twitter.com/manuelernestog" target="_blank">
+        Let's connect!</a
+      >
+      <a
+        href="https://github.com/manuelernestog/astrofy"
+        target="_blank"
+        class="btn btn-outline ml-5"
+      >
+        Get This template
+      </a>
+    </div> -->
+  </div>
+
+  <div>
+    <div class="text-3xl w-full font-bold mb-2">Work Experience</div>
+  </div>
+
+  <!-- <HorizontalCard
+    title="雏鹰计划首席班长"
+    img="/test.webp"
+    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    url="#"
+    badge="NEW"
+  /> -->
+  <HorizontalCard
+    title="雏鹰计划首席班长"
+    img="/Squad_Leader.webp"
+    desc="参与私募基金投资，落实雏鹰计划成员实习工作计划（包括本人），制定雏鹰计划个人采访与拍摄，代表雏鹰计划在香港，深圳，珠海，重庆，成都等地举办活动专场并进行演讲宣传。"
+    url="https://youtu.be/q70HkoGYtHM"
+  />
+  <div class="divider my-0"></div>
+  <HorizontalCard
+    title="总经理助理"
+    img="/Assistan_General_Manager.webp"
+    desc="参与并协助汁力源工厂各部门运作（包括但不限于行政，财务，生产，营销等部门）。制定了汁力源科技有限公司工厂进行拍摄讲解。担任汁力源慈善两地交流会的总统筹负责人，组织了为期三天的慈善交流活动并吸引了来自中国六个不同城市的慈善参与者（共50位）来到贵州道真进行慈善交流活动。"
+    url="https://youtu.be/L_AXBAMM62w"
+  />
+  <div class="divider my-0"></div>
+  <HorizontalCard
+    title="实习生"
+    img="/intern.webp"
+    desc="参与编辑如影智能（北京）项目投资分析报告与中国房地产行业分析报告并向龙石资本负责人进行演示，学习Dragonstone Global  Dynamics OFCWingspan Project 基金结构，投资范围，以及其储备项目。"
+    url="#"
+  />
+
+  <div>
+    <div class="text-3xl w-full font-bold mb-5 mt-10">Latest from blog</div>
+  </div>
+
+  {
+    last_posts.map((post) => (
+      <>
+        <HorizontalCard
+          title={post.data.title}
+          img={post.data.heroImage}
+          desc={post.data.description}
+          url={"/blog/" + createSlug(post.data.title, post.slug)}
+          target="_self"
+          badge={post.data.badge}
+        />
+        <div class="divider my-0" />
+      </>
+    ))
+  }
+</BaseLayout>
